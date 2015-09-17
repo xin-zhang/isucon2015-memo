@@ -32,3 +32,4 @@ https://github.com/xin-zhang/isucon2015
 
 ### Push/Pull Test
 liang
+ricetuan
