@@ -29,3 +29,6 @@ https://github.com/xin-zhang/isucon2015-memo
 __Repo for code__
 
 https://github.com/xin-zhang/isucon2015
+
+### Push/Pull Test
+liang
