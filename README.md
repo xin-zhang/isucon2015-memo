@@ -1,7 +1,5 @@
 # Isucon2015-memo
 
-For memo, work log, etc.
-
 ### About Isucon2005
 
 ISUCON2015: http://isucon.net/
