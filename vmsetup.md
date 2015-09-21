@@ -26,3 +26,53 @@ sudo /etc/init.d/nginx start
 sudo service hhvm restart
 ```
 
+###tools install
+```
+sudo apt-get install git vim
+
+###analysis tools install
+```
+gpg --keyserver  hkp://keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A
+gpg -a --export CD2EFD2A | sudo apt-key add -
+echo "deb http://repo.percona.com/apt `lsb_release -cs` main" >> sudo /etc/apt/sources.list.d/percona.list
+echo "deb-src http://repo.percona.com/apt `lsb_release -cs` main" >> sudo /etc/apt/sources.list.d/percona.list
+sudo apt-get install percona-toolkit
+echo "deb http://deb.goaccess.io $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list
+wget -O - http://deb.goaccess.io/gnugpg.key | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install goaccess
+```
+
+###DB
+```
+pt-query-digest slow.log
+or
+tcpdump -s 65535 -x -nn -q -tttt -i any -c 1000 port 3306 > mysql.tcp.txt
+pt-query-digest --type tcpdump mysql.tcp.txt
+```
+
+
+###ngnix
+```
+ricetuan@instance-2:~$ cat /etc/goaccess/ltsv.nginx
+color_scheme 2
+date_format %d/%b/%Y
+time_format %H:%M:%S
+log_format host:%h\tuser:%^\ttime:%d:%t %^\treq:%r\tstatus:%s\tsize:%b\treferer:%R\tua:%u\tforwardedfor:%^\treqtime:%T\tapptime:%^
+
+log_format ltsv "host:$remote_addr"
+"\tuser:$remote_user"
+"\ttime:$time_local"
+"\treq:$request"
+"\tstatus:$status"
+"\tsize:$body_bytes_sent"
+"\treferer:$http_referer"
+"\tua:$http_user_agent"
+"\tforwardedfor:$http_x_forwarded_for"
+"\treqtime:$request_time"
+"\tapptime:$upstream_response_time";
+access_log /var/log/nginx/ap.access.log ltsv;
+error_log /var/log/nginx/error.log;
+
+goaccess -f /var/log/nginx/ap.access.log -p /etc/goaccess/ltsv.nginx
+```
