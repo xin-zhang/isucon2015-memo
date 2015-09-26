@@ -119,3 +119,60 @@ Create Table: CREATE TABLE `users` (
   | users |          0 | account_name |            1 | account_name | A         |        4875 |     NULL | NULL   |      | BTREE      |         |               |
   | users |          0 | email        |            1 | email        | A         |        4875 |     NULL | NULL   |      | BTREE      |         |               |
   +-------+------------+--------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+
+
+mysql> select count(*) from comments;
++----------+
+| count(*) |
++----------+
+|  1500000 |
++----------+
+1 row in set (12.24 sec)
+
+mysql> select count(*) from entries;
++----------+
+| count(*) |
++----------+
+|   500000 |
++----------+
+1 row in set (2.49 sec)
+
+mysql> select count(*) from footprints;
++----------+
+| count(*) |
++----------+
+|   500000 |
++----------+
+1 row in set (0.11 sec)
+
+mysql> select count(*) from relations;
++----------+
+| count(*) |
++----------+
+|   494906 |
++----------+
+1 row in set (0.18 sec)
+
+mysql> select count(*) from profiles;
++----------+
+| count(*) |
++----------+
+|     5000 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from salts;
++----------+
+| count(*) |
++----------+
+|     5000 |
++----------+
+1 row in set (0.02 sec)
+
+mysql> select count(*) from users;
++----------+
+| count(*) |
++----------+
+|     5000 |
++----------+
+1 row in set (0.08 sec)
