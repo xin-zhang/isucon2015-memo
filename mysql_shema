@@ -1,0 +1,121 @@
+*************************** 1. row ***************************
+       Table: comments
+Create Table: CREATE TABLE `comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `entry_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `comment` text,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `entry_id` (`entry_id`),
+  KEY `created_at` (`created_at`)
+) ENGINE=InnoDB AUTO_INCREMENT=1500019 DEFAULT CHARSET=utf8mb4
+*************************** 1. row ***************************
+       Table: entries
+Create Table: CREATE TABLE `entries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `private` tinyint(4) NOT NULL,
+  `body` text,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`,`created_at`),
+  KEY `created_at` (`created_at`)
+) ENGINE=InnoDB AUTO_INCREMENT=500011 DEFAULT CHARSET=utf8mb4
+*************************** 1. row ***************************
+       Table: footprints
+Create Table: CREATE TABLE `footprints` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `owner_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=500083 DEFAULT CHARSET=utf8
+*************************** 1. row ***************************
+       Table: profiles
+Create Table: CREATE TABLE `profiles` (
+  `user_id` int(11) NOT NULL,
+  `first_name` varchar(64) NOT NULL,
+  `last_name` varchar(64) NOT NULL,
+  `sex` varchar(4) NOT NULL,
+  `birthday` date NOT NULL,
+  `pref` varchar(4) NOT NULL,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+*************************** 1. row ***************************
+       Table: relations
+Create Table: CREATE TABLE `relations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `one` int(11) NOT NULL,
+  `another` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `friendship` (`one`,`another`)
+) ENGINE=InnoDB AUTO_INCREMENT=500015 DEFAULT CHARSET=utf8
+*************************** 1. row ***************************
+       Table: salts
+Create Table: CREATE TABLE `salts` (
+  `user_id` int(11) NOT NULL,
+  `salt` varchar(6) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+*************************** 1. row ***************************
+       Table: users
+Create Table: CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `account_name` varchar(64) NOT NULL,
+  `nick_name` varchar(32) NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `passhash` varchar(128) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `account_name` (`account_name`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=5001 DEFAULT CHARSET=utf8mb4
+  
+
+
+  +----------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  | Table    | Non_unique | Key_name   | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
+  +----------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  | comments |          0 | PRIMARY    |            1 | id          | A         |     1382425 |     NULL | NULL   |      | BTREE      |         |               |
+  | comments |          1 | entry_id   |            1 | entry_id    | A         |     1382425 |     NULL | NULL   |      | BTREE      |         |               |
+  | comments |          1 | created_at |            1 | created_at  | A         |     1382425 |     NULL | NULL   |      | BTREE      |         |               |
+  +----------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  +---------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  | Table   | Non_unique | Key_name   | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
+  +---------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  | entries |          0 | PRIMARY    |            1 | id          | A         |      417472 |     NULL | NULL   |      | BTREE      |         |               |
+  | entries |          1 | user_id    |            1 | user_id     | A         |        9708 |     NULL | NULL   |      | BTREE      |         |               |
+  | entries |          1 | user_id    |            2 | created_at  | A         |      417472 |     NULL | NULL   |      | BTREE      |         |               |
+  | entries |          1 | created_at |            1 | created_at  | A         |      417472 |     NULL | NULL   |      | BTREE      |         |               |
+  +---------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  +------------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  | Table      | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
+  +------------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  | footprints |          0 | PRIMARY  |            1 | id          | A         |      516373 |     NULL | NULL   |      | BTREE      |         |               |
+  +------------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  +----------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  | Table    | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
+  +----------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  | profiles |          0 | PRIMARY  |            1 | user_id     | A         |        5166 |     NULL | NULL   |      | BTREE      |         |               |
+  +----------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  +-----------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  | Table     | Non_unique | Key_name   | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
+  +-----------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  | relations |          0 | PRIMARY    |            1 | id          | A         |      549282 |     NULL | NULL   |      | BTREE      |         |               |
+  | relations |          0 | friendship |            1 | one         | A         |       10363 |     NULL | NULL   |      | BTREE      |         |               |
+  | relations |          0 | friendship |            2 | another     | A         |      549282 |     NULL | NULL   |      | BTREE      |         |               |
+  +-----------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  +-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  | Table | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
+  +-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  | salts |          0 | PRIMARY  |            1 | user_id     | A         |        5000 |     NULL | NULL   |      | BTREE      |         |               |
+  +-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  +-------+------------+--------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  | Table | Non_unique | Key_name     | Seq_in_index | Column_name  | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
+  +-------+------------+--------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+  | users |          0 | PRIMARY      |            1 | id           | A         |        4875 |     NULL | NULL   |      | BTREE      |         |               |
+  | users |          0 | account_name |            1 | account_name | A         |        4875 |     NULL | NULL   |      | BTREE      |         |               |
+  | users |          0 | email        |            1 | email        | A         |        4875 |     NULL | NULL   |      | BTREE      |         |               |
+  +-------+------------+--------------+--------------+--------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
